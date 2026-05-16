@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import MobileNav from '@/components/mobile-nav'
 
 const navLinks = [
   { href: '/calculator', label: 'Calculator' },
@@ -16,7 +17,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <Link href="/calculator" className="text-lg font-bold text-green-600">
             CalorieApp
           </Link>
-          <div className="flex items-center gap-6">
+          {/* Desktop nav — hidden on mobile */}
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map(link => (
               <Link
                 key={link.href}
@@ -29,7 +31,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </nav>
-      <main className="max-w-4xl mx-auto px-4 py-8">{children}</main>
+
+      {/* pb-24 on mobile so content clears the bottom tab bar */}
+      <main className="max-w-4xl mx-auto px-4 py-6 pb-24 md:py-8 md:pb-8">
+        {children}
+      </main>
+
+      <MobileNav />
     </div>
   )
 }

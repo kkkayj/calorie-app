@@ -193,7 +193,7 @@ export default function ProfilePage() {
             <span className="text-xs bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded-full">Pro</span>
           </div>
           <p className="text-xs text-gray-400 mb-4">Set your daily protein, carbs, and fat goals. These show as progress bars in your food log.</p>
-          <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
             {[
               { key: 'protein', label: 'Protein (g)', color: 'focus:ring-purple-400' },
               { key: 'carbs',   label: 'Carbs (g)',   color: 'focus:ring-orange-400' },
