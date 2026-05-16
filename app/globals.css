@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+  background: linear-gradient(160deg, #f0fdf4 0%, #fefce8 55%, #fff7ed 100%);
+  min-height: 100%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-16px) rotate(var(--r, 0deg)); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+}
+
+@keyframes floatWide {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(var(--r, 0deg)); }
+  33%       { transform: translateY(-18px) translateX(8px) rotate(var(--r, 0deg)); }
+  66%       { transform: translateY(-8px) translateX(-6px) rotate(var(--r, 0deg)); }
+}

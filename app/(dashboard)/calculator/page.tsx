@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import {
   calculateBMR, calculateTDEE, getCalorieTarget,
@@ -22,9 +23,9 @@ const goalOptions: { value: Goal; label: string; note: string }[] = [
 ]
 
 export default function CalculatorPage() {
+  const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
 
   const [age,      setAge]      = useState('')
   const [gender,   setGender]   = useState<Gender | ''>('')
@@ -85,8 +86,7 @@ export default function CalculatorPage() {
     }).eq('id', user.id)
 
     setSaving(false)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2500)
+    router.push('/next-steps')
   }
 
   if (loading) {
@@ -94,7 +94,7 @@ export default function CalculatorPage() {
   }
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold text-gray-900 mb-1">Calorie Calculator</h1>
       <p className="text-gray-500 mb-8">
         Your stats are pre-filled from onboarding. Update them any time and hit Save.
@@ -191,7 +191,7 @@ export default function CalculatorPage() {
           disabled={saving || !ready}
           className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 transition-colors"
         >
-          {saving ? 'Saving…' : saved ? '✓ Saved!' : 'Save changes'}
+          {saving ? 'Saving…' : 'Save & continue →'}
         </button>
       </div>
 
@@ -223,6 +223,7 @@ export default function CalculatorPage() {
           </p>
         </div>
       )}
+
     </div>
   )
 }

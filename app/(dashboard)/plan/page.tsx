@@ -18,8 +18,9 @@ export default async function PlanPage({ searchParams }: Props) {
   const supabase = createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const status = user ? await getSubscriptionStatus(user.id) : null
-  const isPro  = status === 'active' || status === 'trialing'
+  const status  = user ? await getSubscriptionStatus(user.id) : null
+  const isOwner = user?.email === process.env.OWNER_EMAIL
+  const isPro   = isOwner || status === 'active' || status === 'trialing'
 
   if (!isPro) {
     return <UpgradeCTA showSuccess={searchParams.success === 'true'} />

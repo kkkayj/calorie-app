@@ -1,4 +1,22 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # CalorieApp — Claude Code Project Guide
+
+## Commands
+
+```bash
+npm run dev      # start local dev server at http://localhost:3000
+npm run build    # production build — must pass before deploying
+npm run lint     # ESLint check
+npm run start    # run production build locally
+```
+
+**Local Stripe webhooks** (requires Stripe CLI installed):
+```bash
+stripe listen --forward-to localhost:3000/api/stripe/webhook --api-key sk_test_...
+```
 
 ## Project Overview
 A subscription-based calorie tracking and meal planning web app. Users can calculate their TDEE, log food, and get AI-generated calorie plans to gain or lose weight. Premium plans are gated behind a Stripe subscription.
@@ -11,7 +29,7 @@ A subscription-based calorie tracking and meal planning web app. Users can calcu
 - **Auth:** Supabase Auth
 - **Payments:** Stripe
 - **AI Plans:** Anthropic Claude API (claude-sonnet-4-20250514)
-- **Deployment:** Antigravity
+- **Deployment:** Vercel
 
 ## Project Structure
 ```
@@ -31,10 +49,11 @@ app/
 
 components/         # shared UI components
 lib/
-  supabase.ts       # Supabase client (browser + server)
-  stripe.ts         # Stripe client
-  claude.ts         # Anthropic client
-  tdee.ts           # BMR/TDEE calculation logic
+  supabase.ts         # Supabase browser client (use in client components)
+  supabase-server.ts  # Supabase server client + admin client (use in API routes / server components)
+  stripe.ts           # Stripe client
+  claude.ts           # Anthropic client (server-side only)
+  tdee.ts             # BMR/TDEE calculation logic
 middleware.ts       # protect dashboard routes
 ```
 
@@ -47,6 +66,14 @@ middleware.ts       # protect dashboard routes
 ## Subscription Tiers
 - **Free:** TDEE calculator + basic food logging
 - **Pro (~$9/mo):** AI meal plan generation, macro tracking, unlimited plan history
+
+## Known Quirks
+
+- **`next.config.mjs`** — must be `.mjs`, not `.ts`. Next.js 14 does not support TypeScript config files.
+- **Stripe `apiVersion`** — must be `'2024-06-20'` (the version supported by the installed `stripe@16` package). Do not change it.
+- **`setAll` cookie type** — `@supabase/ssr` requires explicit typing: `(cookiesToSet: { name: string; value: string; options?: object }[])`. Without it, TypeScript raises an implicit-any error.
+- **Working directory has a space** — `c:\Users\heynn\OneDrive\Documents\calories app`. Always quote paths in terminal commands.
+- **Register flow** — after `signUp`, immediately calls `signInWithPassword` so the session is created even if email confirmation is disabled. Do not change this pattern.
 
 ## Key Rules
 - Always use TypeScript — no plain JS files
