@@ -202,11 +202,11 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-6">
 
             {/* Free */}
-            <div className="bg-white/80 rounded-2xl border border-gray-200 p-7">
+            <div className="bg-white/80 rounded-2xl border border-gray-200 p-7 flex flex-col">
               <h3 className="text-lg font-bold text-gray-900 mb-1">Free</h3>
               <div className="text-3xl font-bold text-gray-900 mb-1">$0</div>
               <p className="text-sm text-gray-400 mb-6">Forever free</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 flex-1">
                 {pricingFree.map(f => (
                   <li key={f} className="flex items-center gap-3 text-sm text-gray-600">
                     <span className="text-green-500 font-bold">✓</span> {f}
@@ -215,18 +215,18 @@ export default function LandingPage() {
               </ul>
               <Link
                 href="/register"
-                className="block w-full text-center border border-gray-300 text-gray-700 py-2.5 rounded-xl font-semibold hover:border-gray-400 transition-colors"
+                className="block w-full text-center border border-gray-300 text-gray-700 py-2.5 rounded-xl font-semibold hover:border-gray-400 transition-colors mt-8"
               >
                 Get started
               </Link>
             </div>
 
             {/* Pro */}
-            <div className="bg-green-600 rounded-2xl p-7 text-white">
+            <div className="bg-green-600 rounded-2xl p-7 text-white flex flex-col">
               <h3 className="text-lg font-bold mb-1">Pro</h3>
               <div className="text-3xl font-bold mb-1">$9</div>
               <p className="text-sm text-green-200 mb-6">per month · cancel anytime</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 flex-1">
                 {pricingPro.map(f => (
                   <li key={f} className="flex items-center gap-3 text-sm text-green-50">
                     <span className="text-white font-bold">✓</span> {f}
@@ -235,7 +235,7 @@ export default function LandingPage() {
               </ul>
               <Link
                 href="/register"
-                className="block w-full text-center bg-white text-green-700 py-2.5 rounded-xl font-semibold hover:bg-green-50 transition-colors"
+                className="block w-full text-center bg-white text-green-700 py-2.5 rounded-xl font-semibold hover:bg-green-50 transition-colors mt-8"
               >
                 Start free → upgrade inside
               </Link>
