@@ -200,21 +200,21 @@ export default function CalculatorPage() {
         <div className="mt-6 bg-green-50 border border-green-200 rounded-2xl p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Your results</h2>
 
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div className="bg-white rounded-xl p-4 border border-gray-100">
-              <p className="text-3xl font-bold text-gray-800">{bmr.toLocaleString()}</p>
-              <p className="text-sm font-medium text-gray-600 mt-1">BMR</p>
-              <p className="text-xs text-gray-400 mt-0.5">calories at rest</p>
+          <div className="grid grid-cols-3 gap-2 md:gap-4 text-center">
+            <div className="bg-white rounded-xl p-3 md:p-4 border border-gray-100">
+              <p className="text-xl md:text-3xl font-bold text-gray-800">{bmr.toLocaleString()}</p>
+              <p className="text-xs md:text-sm font-medium text-gray-600 mt-1">BMR</p>
+              <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">calories at rest</p>
             </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-100">
-              <p className="text-3xl font-bold text-gray-800">{tdee.toLocaleString()}</p>
-              <p className="text-sm font-medium text-gray-600 mt-1">TDEE</p>
-              <p className="text-xs text-gray-400 mt-0.5">maintenance</p>
+            <div className="bg-white rounded-xl p-3 md:p-4 border border-gray-100">
+              <p className="text-xl md:text-3xl font-bold text-gray-800">{tdee.toLocaleString()}</p>
+              <p className="text-xs md:text-sm font-medium text-gray-600 mt-1">TDEE</p>
+              <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">maintenance</p>
             </div>
-            <div className="bg-green-600 rounded-xl p-4">
-              <p className="text-3xl font-bold text-white">{target.toLocaleString()}</p>
-              <p className="text-sm font-medium text-green-100 mt-1">Your target</p>
-              <p className="text-xs text-green-200 mt-0.5">calories/day</p>
+            <div className="bg-green-600 rounded-xl p-3 md:p-4">
+              <p className="text-xl md:text-3xl font-bold text-white">{target.toLocaleString()}</p>
+              <p className="text-xs md:text-sm font-medium text-green-100 mt-1">Your target</p>
+              <p className="text-xs text-green-200 mt-0.5 hidden sm:block">calories/day</p>
             </div>
           </div>
 
