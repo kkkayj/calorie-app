@@ -87,11 +87,10 @@ export default function TrackerPage() {
         setTarget(getCalorieTarget(tdee, data.goal as Goal))
       }
 
-      // Macro targets — columns may not exist yet, handle gracefully
       setMacroTargets({
-        protein_g: data?.protein_g   ?? null,
-        carbs_g:   data?.carbs_g     ?? null,
-        fat_g:     data?.fat_g       ?? null,
+        protein_g: data?.target_protein_g ?? null,
+        carbs_g:   data?.target_carbs_g   ?? null,
+        fat_g:     data?.target_fat_g     ?? null,
       })
 
       // Subscription check
@@ -232,6 +231,7 @@ export default function TrackerPage() {
       setSearching(true)
       try {
         const res = await fetch(`/api/food/search?q=${encodeURIComponent(value)}`)
+        if (!res.ok) { setSearchResults([]); return }
         const { foods } = await res.json()
         setSearchResults(foods ?? [])
       } finally {

@@ -3,7 +3,7 @@ import { createServerSupabaseClient } from '@/lib/supabase-server'
 export async function GET() {
   const supabase = createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return Response.json({ streak: 0 })
+  if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { data } = await supabase
     .from('calorie_logs')

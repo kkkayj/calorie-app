@@ -201,8 +201,8 @@ export default function PlanGenerator() {
     const res  = await fetch('/api/ai/generate-plan', { method: 'POST' })
     const data = await res.json()
 
-    if (data.error) {
-      setError(data.error)
+    if (!res.ok || data.error) {
+      setError(data.error ?? 'Something went wrong. Please try again.')
       setLoading(false)
       return
     }

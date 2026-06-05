@@ -30,13 +30,15 @@ export async function POST(request: Request) {
     const subscriptionId = session.subscription as string
 
     if (userId && subscriptionId) {
-      const sub = await stripe.subscriptions.retrieve(subscriptionId)
+      const sub        = await stripe.subscriptions.retrieve(subscriptionId)
+      const customerId = typeof session.customer === 'string' ? session.customer : null
+      const priceId    = sub.items.data[0]?.price.id ?? null
       await supabase.from('subscriptions').upsert({
         user_id:                 userId,
-        stripe_customer_id:      session.customer as string,
+        stripe_customer_id:      customerId,
         stripe_subscription_id:  subscriptionId,
         status:                  sub.status,
-        price_id:                sub.items.data[0].price.id,
+        price_id:                priceId,
         current_period_end:      new Date(sub.current_period_end * 1000).toISOString(),
       })
     }
