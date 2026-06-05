@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import CursorGlow from '@/components/cursor-glow'
+import MagneticButton from '@/components/magnetic-button'
 
 const features = [
   {
@@ -78,6 +80,7 @@ const heroFruits = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
+      <CursorGlow />
 
       {/* Nav */}
       <header className="bg-white/70 backdrop-blur-sm border-b border-white/60 sticky top-0 z-10">
@@ -87,12 +90,14 @@ export default function LandingPage() {
             <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900 font-medium">
               Sign in
             </Link>
-            <Link
-              href="/register"
-              className="text-sm bg-green-600 text-white px-4 py-1.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
-            >
-              Get started free
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/register"
+                className="text-sm bg-green-600 text-white px-4 py-1.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
+              >
+                Get started free
+              </Link>
+            </MagneticButton>
           </div>
         </div>
       </header>
@@ -107,6 +112,9 @@ export default function LandingPage() {
             animationDelay: `${f.delay}s`,
           }}>{f.emoji}</span>
         ))}
+        {/* Ambient glow behind hero text */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[320px] bg-green-300/15 blur-[90px] rounded-full pointer-events-none" />
+
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
           <span className="inline-block bg-white/80 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-green-100 shadow-sm">
             🎉 Free to start · No credit card needed
@@ -121,18 +129,22 @@ export default function LandingPage() {
             Calculate your daily calorie target, log your meals, and get an AI-generated meal plan personalised to your goal.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Link
-              href="/register"
-              className="bg-green-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-green-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Start for free →
-            </Link>
-            <Link
-              href="#pricing"
-              className="bg-white/80 text-gray-700 px-8 py-4 rounded-2xl font-bold text-lg border border-gray-200 hover:border-gray-300 transition-all shadow-sm"
-            >
-              See pricing
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/register"
+                className="bg-green-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-green-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                Start for free →
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link
+                href="#pricing"
+                className="bg-white/80 text-gray-700 px-8 py-4 rounded-2xl font-bold text-lg border border-gray-200 hover:border-gray-300 transition-all shadow-sm"
+              >
+                See pricing
+              </Link>
+            </MagneticButton>
           </div>
         </div>
       </section>
@@ -145,7 +157,7 @@ export default function LandingPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {features.map(f => (
-              <div key={f.title} className="bg-white/80 rounded-2xl p-6 shadow-sm border border-white/60">
+              <div key={f.title} className="bg-white/80 rounded-2xl p-6 shadow-sm border border-white/60 hover:shadow-xl hover:shadow-green-100/60 hover:-translate-y-1.5 hover:border-green-100/80 transition-all duration-300">
                 <div className="text-3xl mb-3">{f.emoji}</div>
                 <div className="flex items-center gap-2 mb-2">
                   <h3 className="font-bold text-gray-900">{f.title}</h3>
@@ -173,7 +185,7 @@ export default function LandingPage() {
           <p className="text-gray-500 text-center mb-10">Real results from real users.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map(t => (
-              <div key={t.name} className="bg-white/80 rounded-2xl p-6 shadow-sm border border-white/60 flex flex-col gap-4">
+              <div key={t.name} className="bg-white/80 rounded-2xl p-6 shadow-sm border border-white/60 flex flex-col gap-4 hover:shadow-xl hover:shadow-green-100/40 hover:-translate-y-1.5 hover:border-green-100/80 transition-all duration-300">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className="text-yellow-400 text-sm">★</span>
@@ -202,7 +214,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-6">
 
             {/* Free */}
-            <div className="bg-white/80 rounded-2xl border border-gray-200 p-7 flex flex-col">
+            <div className="bg-white/80 rounded-2xl border border-gray-200 p-7 flex flex-col hover:shadow-xl hover:shadow-gray-100/80 hover:-translate-y-1 transition-all duration-300">
               <h3 className="text-lg font-bold text-gray-900 mb-1">Free</h3>
               <div className="text-3xl font-bold text-gray-900 mb-1">$0</div>
               <p className="text-sm text-gray-400 mb-6">Forever free</p>
@@ -222,7 +234,7 @@ export default function LandingPage() {
             </div>
 
             {/* Pro */}
-            <div className="bg-green-600 rounded-2xl p-7 text-white flex flex-col">
+            <div className="bg-green-600 rounded-2xl p-7 text-white flex flex-col hover:shadow-xl hover:shadow-green-400/40 hover:-translate-y-1 transition-all duration-300">
               <h3 className="text-lg font-bold mb-1">Pro</h3>
               <div className="text-3xl font-bold mb-1">$9</div>
               <p className="text-sm text-green-200 mb-6">per month · cancel anytime</p>
@@ -249,12 +261,14 @@ export default function LandingPage() {
       <section className="py-16 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-3">Ready to start?</h2>
         <p className="text-gray-500 mb-6">Create your free account in 30 seconds.</p>
-        <Link
-          href="/register"
-          className="inline-block bg-green-600 text-white px-8 py-3 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg"
-        >
-          Create free account
-        </Link>
+        <MagneticButton>
+          <Link
+            href="/register"
+            className="inline-block bg-green-600 text-white px-8 py-3 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg"
+          >
+            Create free account
+          </Link>
+        </MagneticButton>
       </section>
 
       {/* Footer */}
